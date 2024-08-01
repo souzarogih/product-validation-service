@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5431}/${DB_NAME:product-db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
+    topic:
+        orchestrator: orchestrator
+        product-validation-success: product-validation-success
+        product-validation-fail: product-validation-fail
+
+    consumer:
+      group-id: orchestrator-group
+      auto-offset-reset: latest
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  application:
+    name: saga-product-validation-service
+
+server:
+  port: 8093
+
+logging:
+  level:
+    org:
+      apache:
+        kafka: OFF

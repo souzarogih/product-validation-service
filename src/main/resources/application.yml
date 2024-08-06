@@ -17,8 +17,9 @@ spring:
       auto-offset-reset: latest
 
   jpa:
+    show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -26,11 +27,16 @@ spring:
   application:
     name: saga-product-validation-service
 
+  sql:
+    init:
+      mode: always
+
 server:
   port: 8093
 
-logging:
-  level:
-    org:
-      apache:
-        kafka: OFF
+
+#logging:
+#  level:
+#    org:
+#      apache:
+#        kafka: OFF
